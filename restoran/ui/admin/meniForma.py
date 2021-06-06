@@ -6,31 +6,43 @@ from tkinter import scrolledtext
 class NewMealUI():
     def __init__(self):
         self.app = tkinter.Tk()
-        self.app.geometry("500x300")
+        self.app.geometry("900x300")
+        self.ingredients = []
+        
         self.leftFrame= tkinter.Frame(self.app)
 
         self.entryFrame = tkinter.Frame(self.leftFrame)
         self.entryLabel = tkinter.Label(self.entryFrame, text="Meal Name")
         self.entryLabel.pack(side=LEFT)
+        self.createMealButton=tkinter.Button(self.entryFrame, text="Create the meal", command= lambda : self.createMeal())
+        self.createMealButton.pack(side=RIGHT)
+        self.appendOfficialDoc=tkinter.Button(self.entryFrame, text="Attach the official document", command= lambda : self.createMeal())
+        self.appendOfficialDoc.pack(side=RIGHT)
         self.nameEntry = tkinter.Entry(self.entryFrame)
         self.nameEntry.pack(side=RIGHT)
         self.entryFrame.pack(side=TOP)
         self.entryFrame.pack(side=TOP)
-        self.tutorial = scrolledtext.ScrolledText(self.leftFrame, width=30,height=60)
+        self.tutorial = scrolledtext.ScrolledText(self.leftFrame, width=70,height=60)
         self.tutorial.pack(side=BOTTOM)
         self.leftFrame.pack(side=LEFT)
 
 
         self.rightFrame = tkinter.Frame(self.app)
-        self.ingredients = tkinter.Listbox(self.rightFrame, width=30, height=60)
+        self.ingredientsList = tkinter.Listbox(self.rightFrame, width=50, height=60)
         self.addNewIng = tkinter.Button(self.rightFrame, text="Add new ingredient", command= lambda : self.addIngredient())
         self.addNewIng.pack(side=TOP)
-        self.ingredients.pack(side=TOP)
+        self.ingredientsList.pack(side=TOP)
         self.rightFrame.pack(side=RIGHT)
+    def createMeal(self):
+        meal = {}
+        meal["instruction"] = self.tutorial.get("1.0","end")
+        meal["ingredients"] = self.ingredients
+        print(meal)
     def addIngredient(self):
         dialog = NewIngredientForm(self.app)
         ingredient = dialog.ingredient
-        self.ingredients.insert("end",f"{ingredient['name']} : {ingredient['amount']}")
+        self.ingredients.append(ingredient)
+        self.ingredientsList.insert("end",f"{ingredient['name']} : {ingredient['amount']}")
 class NewIngredientForm(tkinter.simpledialog.Dialog):
     def __init__(self, parent):
         self.ingredient = {}
