@@ -2,7 +2,7 @@ import tkinter
 from tkinter import ttk, TOP, BOTTOM, LEFT, RIGHT, BOTH, W
 from tkinter import filedialog, simpledialog, messagebox
 from tkinter import scrolledtext
-
+import json
 class OrderUI():
     def __init__(self, parent, name, ammount):
         self.block = tkinter.Frame(parent,borderwidth = 1)
@@ -52,6 +52,9 @@ class detailsWIndow():
 
         self.tutorial = tkinter.Frame(self.window)
 
+        with open(f"../../resources/mealData/{mealName}.json", 'r') as f:
+            mealData = json.load(f)
+        print(mealData)    
         self.normativ.pack(side=LEFT)
         self.tutorial.pack(side=RIGHT)
 
