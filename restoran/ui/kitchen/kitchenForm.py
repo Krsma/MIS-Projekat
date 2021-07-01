@@ -3,6 +3,7 @@ from tkinter import ttk, TOP, BOTTOM, LEFT, RIGHT, BOTH, W
 from tkinter import filedialog, simpledialog, messagebox
 from tkinter import scrolledtext
 import json
+from restoran.io import io
 class OrderUI():
     def __init__(self, parent, name, ammount):
         self.block = tkinter.Frame(parent,borderwidth = 1)
@@ -49,12 +50,26 @@ class detailsWIndow():
 
         self.normativ = tkinter.Frame(self.window)
         # generisi vrednost
+        
 
         self.tutorial = tkinter.Frame(self.window)
-
-        with open(f"../../resources/mealData/{mealName}.json", 'r') as f:
-            mealData = json.load(f)
+        mealData = io.loadMealData(mealName)
+        # with open(f"../../resources/mealData/{mealName}.json", 'r') as f:
+        #     mealData = json.load(f)
         print(mealData)    
+        self.ingredientsList = tkinter.Listbox(self.normativ, width=20, height=40)
+        for ingredient in mealData["ingredients"]:  
+            self.ingredientsList.insert("end",f"{ingredient['name']} : {ingredient['amount']}")
+
+        self.instructions = scrolledtext.ScrolledText(self.tutorial, width=20,height=40)
+        self.instructions.insert('end', mealData["instructions"])
+
+
+        if "docsName" in mealData:
+            self.docsButton = tkinter.Button(self.tutorial, width=0, text=f"Show full documentation", command= lambda : io.openDocs(mealData["docsName"]))
+            self.docsButton.pack(side=BOTTOM)
+        self.instructions.pack(side=TOP)
+        self.ingredientsList.pack(side=BOTTOM)
         self.normativ.pack(side=LEFT)
         self.tutorial.pack(side=RIGHT)
 

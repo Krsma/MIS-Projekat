@@ -5,5 +5,6 @@
       {"name": "slanina-traka","amount" : 4},
       {"name": "ceri-paradajz","amount" : 3}
     ],
-    "instructions" : "Jaja peci na blagoj vatri do zlatne boje. \n Proprziti prvo slaninu koja pravi podlogu za pecenje jaja" 
+    "instructions" : "Jaja peci na blagoj vatri do zlatne boje. \n Proprziti prvo slaninu koja pravi podlogu za pecenje jaja",
+    "docsName" : "omlet.docx"
   }
