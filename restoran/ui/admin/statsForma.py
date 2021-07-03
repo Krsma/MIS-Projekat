@@ -18,12 +18,12 @@ statistika = [
 class StatsForm():
     def __init__(self):
         self.app = tkinter.Tk()
-        self.app.geometry("900x300")
+        #self.app.geometry("300x300")
         self.stats = statistika
 
         self.statsList = tkinter.Listbox(self.app, width=50)
         for item in self.stats:
-            self.statsList.insert("end",f"{item['item']} : {item['boughtNo']}")
+            self.statsList.insert("end",f"Item {item['item']} : Purchased {item['boughtNo']} times : Profit margin {item['profitMargin']}")
 
         graphFrame = tkinter.Frame(self.app)
         buttonFrame = tkinter.Frame(self.app)
@@ -48,11 +48,13 @@ class profitWindow():
         super().__init__()
         #print("Usao")
         self.window = tkinter.Toplevel(parent)
-        self.window.geometry("1000x500")
+        self.window.geometry("300x300")
         sortLambda = lambda x : x["boughtNo"]*x["profitMargin"]
         self.stats = sorted(stats, key = sortLambda, reverse = True)
         self.statsList = tkinter.Listbox(self.window, width = 40)
         index = 0
+        self.statsList.insert('end', "Sorted list of most profitable items ")
+        self.statsList.insert('end', "--------------------------------------")
         for item in self.stats:
             index+=1
             self.statsList.insert("end",f"Item {index}: {item['item']} :  Profit {item['boughtNo']*item['profitMargin']}")
@@ -80,7 +82,7 @@ class purchasingWindow():
         super().__init__()
         #print("Usao")
         self.window = tkinter.Toplevel(parent)
-        self.window.geometry("1000x500")
+        self.window.geometry("300x300")
         sortLambda = lambda x : x["boughtNo"]
         self.stats = sorted(stats, key = sortLambda, reverse = True)
         self.statsList = tkinter.Listbox(self.window, width = 40)

@@ -46,7 +46,7 @@ class detailsWIndow():
     def __init__(self, parent, mealName):
         super().__init__()
         self.window = tkinter.Toplevel(parent)
-        self.window.geometry("1000x500")
+        #self.window.geometry("1000x500")
 
         self.normativ = tkinter.Frame(self.window)
         # generisi vrednost
@@ -57,11 +57,11 @@ class detailsWIndow():
         # with open(f"../../resources/mealData/{mealName}.json", 'r') as f:
         #     mealData = json.load(f)
         print(mealData)    
-        self.ingredientsList = tkinter.Listbox(self.normativ, width=20, height=40)
+        self.ingredientsList = tkinter.Listbox(self.normativ, width=40, height=20)
         for ingredient in mealData["ingredients"]:  
             self.ingredientsList.insert("end",f"{ingredient['name']} : {ingredient['amount']}")
 
-        self.instructions = scrolledtext.ScrolledText(self.tutorial, width=20,height=40)
+        self.instructions = scrolledtext.ScrolledText(self.tutorial, width=40,height=20)
         self.instructions.insert('end', mealData["instructions"])
 
 
@@ -107,7 +107,10 @@ def run():
     app.newTicket(2, [{"name": "Omlet", "ammount": 1},{"name": "Brusketi", "ammount": 2},{"name": "Sendvic", "ammount": 4}])
     app.newTicket(3, [{"name": "Rizoto", "ammount": 1},{"name": "Musli", "ammount": 1},{"name": "Palacinke", "ammount": 2}])
     app.newTicket(8, [{"name": "Omlet", "ammount": 1}])
-    app.newTicket("Dostava", [{"name": "Rizoto", "ammount": 1},{"name": "Musli", "ammount": 1},{"name": "Palacinke", "ammount": 2}])
+    app.newTicket(1, [{"name": "Rizoto", "ammount": 1},{"name": "Tost", "ammount": 1},{"name": "Brusketi", "ammount": 2}])
+    app.newTicket(4, [{"name": "Pasta", "ammount": 1},{"name": "Palacinke", "ammount": 2}])
+    app.newTicket("Dostava 1", [{"name": "Brusketi", "ammount": 3}])
+    app.newTicket("Dostava 2", [{"name": "Rizoto", "ammount": 1},{"name": "Musli", "ammount": 1},{"name": "Palacinke", "ammount": 2}])
 
     app.app.mainloop()
 if __name__ == "__main__":

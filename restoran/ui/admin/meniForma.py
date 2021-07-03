@@ -10,8 +10,8 @@ class NewMealUI():
         self.ingredients = []
         
         self.leftFrame= tkinter.Frame(self.app)
-
         self.entryFrame = tkinter.Frame(self.leftFrame)
+        
         self.entryLabel = tkinter.Label(self.entryFrame, text="Meal Name")
         self.entryLabel.pack(side=LEFT)
         self.createMealButton=tkinter.Button(self.entryFrame, text="Create the meal", command= lambda : self.createMeal())
