@@ -1,14 +1,15 @@
 import tkinter
 from tkinter import ttk, TOP, BOTTOM, LEFT, RIGHT, BOTH
 from tkinter import filedialog, simpledialog, messagebox
-from tkinter import scrolledtext
-
+from tkinter import scrolledtext, simpledialog, filedialog
+from restoran.io import io
 class NewMealUI():
     def __init__(self):
         self.app = tkinter.Tk()
         self.app.geometry("900x300")
         self.ingredients = []
-        
+        self.docsPath = None
+
         self.leftFrame= tkinter.Frame(self.app)
         self.entryFrame = tkinter.Frame(self.leftFrame)
         
@@ -16,7 +17,7 @@ class NewMealUI():
         self.entryLabel.pack(side=LEFT)
         self.createMealButton=tkinter.Button(self.entryFrame, text="Create the meal", command= lambda : self.createMeal())
         self.createMealButton.pack(side=RIGHT)
-        self.appendOfficialDoc=tkinter.Button(self.entryFrame, text="Attach the official document", command= lambda : self.createMeal())
+        self.appendOfficialDoc=tkinter.Button(self.entryFrame, text="Attach the official document", command= lambda : self.addDocs())
         self.appendOfficialDoc.pack(side=RIGHT)
         self.nameEntry = tkinter.Entry(self.entryFrame)
         self.nameEntry.pack(side=RIGHT)
@@ -33,10 +34,16 @@ class NewMealUI():
         self.addNewIng.pack(side=TOP)
         self.ingredientsList.pack(side=TOP)
         self.rightFrame.pack(side=RIGHT)
+    def addDocs(self):
+        self.docsPath = filedialog.askopenfile()
     def createMeal(self):
         meal = {}
+        meal["name"] = self.nameEntry.get()
         meal["instruction"] = self.tutorial.get("1.0","end")
         meal["ingredients"] = self.ingredients
+        if self.docsPath is not None:
+            meal["docsName"] = self.docsPath.name
+        io.writeMealData(meal, meal["name"])
         print(meal)
     def addIngredient(self):
         dialog = NewIngredientForm(self.app)

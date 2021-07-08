@@ -6,8 +6,10 @@ def loadMealData(mealName):
         data = json.load(f)
     return data
 def writeMealData(data, mealName):
-    with importlib.resources.open_text("restoran.resources.mealData", mealName) as f:
-        data = json.dump(f)
+    with open(f"/home/krsmav/Faks/MIS/Projekat/restoran/resources/mealData/{mealName}.json", 'w') as f:
+        json.dump(data, f)
+    #with importlib.resources.open_text("restoran.resources.mealData", mealName + ".json") as f:
+    #    json.dump(f)
 def openDocs(docsName):
     with importlib.resources.open_binary("restoran.resources.docs", docsName) as f:
         path = f.name
