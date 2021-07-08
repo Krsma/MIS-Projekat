@@ -3,6 +3,7 @@ from tkinter import ttk, TOP, BOTTOM, LEFT, RIGHT, BOTH
 from tkinter import filedialog, simpledialog, messagebox
 from tkinter import scrolledtext, simpledialog, filedialog
 from restoran.io import io
+from tkinter import messagebox
 class NewMealUI():
     def __init__(self):
         self.app = tkinter.Tk()
@@ -44,6 +45,7 @@ class NewMealUI():
         if self.docsPath is not None:
             meal["docsName"] = self.docsPath.name
         io.writeMealData(meal, meal["name"])
+        messagebox.showinfo("Success", message= f"Succesfuly added meal {meal['name']} to the meni")
         print(meal)
     def addIngredient(self):
         dialog = NewIngredientForm(self.app)
